@@ -54,7 +54,7 @@ class UserController
         if (!$user) {
             return response()->json(['message' => 'Unauthenticated'], 401);
         }
-        
+
         $user->token = null;
         $user->forceSave();
         return response()->json([
