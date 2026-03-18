@@ -17,7 +17,7 @@ class Message extends Model
     public $table = 'appchat_chat_messages';
 
     protected $fillable = [
-        'body',
+        'message',
         'conversation_id',
         'user_id',
         'reply_to',
@@ -26,22 +26,23 @@ class Message extends Model
     public $rules = [
         'conversation_id' => 'required|exists:appchat_chat_conversations,id',
         'user_id' => 'required|exists:appuser_user_users,id',
-        'reply_to' => 'nullable|exists:appchat_chat_messages,id',
-        'message' => 'nullable|string',
+        'reply_to' => 'nullable|integer|exists:appchat_chat_messages,id',
+        'message' => 'required|string',
+        'files' => 'nullable|array',
+        'files.*' => 'file',
     ];
 
     public $belongsTo = [
         'conversation' => Conversation::class,
         'user' => User::class,
-        'reply_to' => Message::class,
+        'replyTo' => Message::class,
     ];
 
     public $hasMany = [
         'reactions' => Reaction::class,
     ];
 
-    public $attachMany= [
+    public $attachMany = [
         'files' => File::class,
     ];
-
 }

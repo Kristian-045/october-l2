@@ -2,6 +2,7 @@
 
 use AppChat\Chat\Http\Controllers\ConversationController;
 use AppChat\Chat\Http\Controllers\ConversationUserController;
+use AppChat\Chat\Http\Controllers\MessageController;
 use AppUser\User\Http\middleware\AuthMiddleware;
 
 Route::prefix('api')->middleware(AuthMiddleware::class)->group(function () {
@@ -14,5 +15,10 @@ Route::prefix('api')->middleware(AuthMiddleware::class)->group(function () {
         //conversation user
         Route::post('{conversation}/attach-users', [ConversationUserController::class, 'attach']);
         Route::post('{conversation}/detach-users', [ConversationUserController::class, 'detach']);
+    });
+    Route::prefix('conversations/{conversation}/messages')->group(function () {
+        Route::get('/', [MessageController::class, 'index']);
+        Route::post('/store', [MessageController::class, 'store']);
+        Route::delete('{id}/destroy', [MessageController::class, 'destroy']);
     });
 });

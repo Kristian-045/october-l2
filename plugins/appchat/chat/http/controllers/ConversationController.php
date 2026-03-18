@@ -39,7 +39,7 @@ class ConversationController
         return response()->json($conversation);
     }
 
-    public function store()
+    public function store(): JsonResponse
     {
         $user = App::make('authUser');
 
