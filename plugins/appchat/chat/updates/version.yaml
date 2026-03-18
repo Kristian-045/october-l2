@@ -1,1 +1,6 @@
-v1.0.1: First version of Chat
+v1.0.1:
+    - First version of Chat
+    - create_conversations_table.php
+    - create_conversation_user_table.php
+    - create_messages_table.php
+    - create_reactions_table.php
