@@ -1,6 +1,8 @@
 <?php namespace AppChat\Chat\Models;
 
+use AppUser\User\Models\User;
 use Model;
+use October\Rain\Database\Traits\Validation;
 
 /**
  * Conversation Model
@@ -9,15 +11,23 @@ use Model;
  */
 class Conversation extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
+    use Validation;
 
-    /**
-     * @var string table name
-     */
     public $table = 'appchat_chat_conversations';
 
-    /**
-     * @var array rules for validation
-     */
-    public $rules = [];
+    protected $fillable = [
+        'name',
+    ];
+
+    public $rules = [
+        'name' => 'required|string|max:255',
+    ];
+
+    public $belongsToMany = [
+        'users' => [User::class]
+    ];
+
+    public $hasMany = [
+        'messages' => [Message::class]
+    ];
 }

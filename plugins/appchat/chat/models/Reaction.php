@@ -1,6 +1,8 @@
 <?php namespace AppChat\Chat\Models;
 
+use AppUser\User\Models\User;
 use Model;
+use October\Rain\Database\Traits\Validation;
 
 /**
  * Reaction Model
@@ -9,15 +11,24 @@ use Model;
  */
 class Reaction extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
+    use Validation;
 
-    /**
-     * @var string table name
-     */
     public $table = 'appchat_chat_reactions';
 
-    /**
-     * @var array rules for validation
-     */
-    public $rules = [];
+    protected $fillable = [
+        'emoji',
+        'message_id',
+        'user_id',
+    ];
+
+    public $rules = [
+        'emoji' => 'required|string',
+        'message_id' => 'required|exists:appchat_chat_messages,id',
+        'user_id' => 'required|exists:appuser_user_users,id',
+    ];
+
+    public $belongsTo = [
+        'user' => User::class,
+        'message' => Message::class,
+    ];
 }
