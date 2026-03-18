@@ -21,7 +21,7 @@ class MessageController
 
         return response()->json(
             $conversation->messages()
-                ->with(['reactions', 'files', 'replyTo'])
+                ->with(['reactions', 'files', 'replyTo', 'user'])
                 ->latest()
                 ->paginate(100)
         );
@@ -48,7 +48,7 @@ class MessageController
             $message->save();
 
             return response()->json(
-                $message->load(['reactions', 'files', 'replyTo'])
+                $message->load(['reactions', 'files', 'replyTo', 'user'])
             );
         });
     }
