@@ -1,5 +1,8 @@
 <?php namespace AppUser\User\Models;
 
+use AppChat\Chat\Models\Conversation;
+use AppChat\Chat\Models\Message;
+use AppChat\Chat\Models\Reaction;
 use Model;
 
 /**
@@ -27,10 +30,22 @@ class User extends Model
     ];
 
     public $rules = [
-        'name'     => 'required|string|max:255',
-        'email'    => 'required|email|unique:appuser_user_users,email',
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:appuser_user_users,email',
         'password' => 'required|string|min:6',
     ];
 
     protected $hashable = ['password'];
+
+    public $belongsToMany = [
+        'conversations' => [
+            Conversation::class,
+            'table' => 'appchat_chat_conversation_user',
+        ]
+    ];
+
+    public $hasMany = [
+        'messages' => [Message::class],
+        'reactions' => [Reaction::class]
+    ];
 }

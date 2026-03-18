@@ -24,7 +24,10 @@ class Conversation extends Model
     ];
 
     public $belongsToMany = [
-        'users' => [User::class]
+        'users' => [
+            User::class,
+            'table' => 'appchat_chat_conversation_user',
+        ]
     ];
 
     public $hasMany = [
