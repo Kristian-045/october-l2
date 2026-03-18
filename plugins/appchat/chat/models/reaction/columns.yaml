@@ -3,6 +3,21 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
+    emoji:
+        label: Emoji
+        sortable: true
         searchable: true
+    message:
+        label: Message
+        relation: message
+        select: message
+        sortable: true
+    user:
+        label: User
+        relation: user
+        select: name
+        sortable: true
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true

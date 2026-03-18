@@ -35,7 +35,7 @@ class Message extends Model
     public $belongsTo = [
         'conversation' => Conversation::class,
         'user' => User::class,
-        'replyTo' => Message::class,
+        'replyTo' => [Message::class, 'key' => 'reply_to'],
     ];
 
     public $hasMany = [

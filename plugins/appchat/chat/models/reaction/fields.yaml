@@ -3,6 +3,19 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    emoji:
+        label: Emoji
+        type: text
+        required: true
+
+    message:
+        label: Message
+        type: relation
+        nameFrom: message
+        required: true
+
+    user:
+        label: User
+        type: relation
+        nameFrom: name
+        required: true

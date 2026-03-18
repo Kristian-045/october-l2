@@ -71,13 +71,12 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
 
         return [
             'user' => [
                 'label' => 'User',
-                'url' => Backend::url('appuser/user/mycontroller'),
-                'icon' => 'icon-leaf',
+                'url' => Backend::url('appuser/user/users'),
+                'icon' => 'icon-users',
                 'permissions' => ['appuser.user.*'],
                 'order' => 500,
             ],

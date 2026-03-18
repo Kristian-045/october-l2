@@ -3,6 +3,40 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    message:
+        label: Message
+        type: textarea
+        required: true
+
+    conversation:
+        label: Conversation
+        type: relation
+        nameFrom: name
+        required: true
+
+    user:
+        label: Sent By
+        type: relation
+        nameFrom: name
+        required: true
+
+    replyTo:
+        label: Reply To
+        type: relation
+        nameFrom: message
+        comment: 'Optional'
+        emptyOption: '-- No reply --'
+
+    files:
+        label: Attachments
+        type: fileupload
+        mode: file
+        useCaption: true
+        tab: Files
+
+    reactions:
+        label: Reactions
+        type: relation
+        nameFrom: emoji
+        tab: Reactions
+        useController: true

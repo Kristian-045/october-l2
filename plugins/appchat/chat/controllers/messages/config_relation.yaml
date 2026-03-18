@@ -1,0 +1,7 @@
+reactions:
+    label: Reaction
+    view:
+        list: $/appchat/chat/models/reaction/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/appchat/chat/models/reaction/fields.yaml

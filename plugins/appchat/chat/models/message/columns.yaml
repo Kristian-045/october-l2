@@ -3,6 +3,20 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
+    message:
+        label: Message
         searchable: true
+    conversation:
+        label: Conversation
+        relation: conversation
+        select: name
+        sortable: true
+    user:
+        label: Sent By
+        relation: user
+        select: name
+        sortable: true
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true

@@ -71,13 +71,12 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
 
         return [
             'chat' => [
                 'label' => 'Chat',
-                'url' => Backend::url('appchat/chat/mycontroller'),
-                'icon' => 'icon-leaf',
+                'url' => Backend::url('appchat/chat/conversations'),
+                'icon' => 'icon-comments',
                 'permissions' => ['appchat.chat.*'],
                 'order' => 500,
             ],

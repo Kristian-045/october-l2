@@ -3,6 +3,20 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    name:
+        label: Name
+        type: text
+        required: true
+
+
+    users:
+        label: Users
+        type: relation
+        nameFrom: name
+        tab: Users
+    messages:
+        label: Messages
+        type: partial
+        path: $/appchat/chat/controllers/conversations/_messages_relation.htm
+        tab: Messages
+        context: update

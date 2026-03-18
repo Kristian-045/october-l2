@@ -1,0 +1,17 @@
+messages:
+    label: Messages
+    manage:
+        form: $/appchat/chat/models/message/fields.yaml
+        list: $/appchat/chat/models/message/columns.yaml
+    view:
+        list: $/appchat/chat/models/message/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+
+messages[reactions]:
+    label: Reaction
+    view:
+        list: $/appchat/chat/models/reaction/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/appchat/chat/models/reaction/fields.yaml

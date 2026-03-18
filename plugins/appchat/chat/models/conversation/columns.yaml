@@ -3,6 +3,11 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
+    name:
+        label: Name
+        sortable: true
         searchable: true
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true

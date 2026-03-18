@@ -3,6 +3,24 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    name:
+        label: Name
+        type: text
+        required: true
+
+    email:
+        label: Email
+        type: text
+        required: true
+
+    password:
+        label: Password
+        type: password
+        comment: 'Leave empty to keep current password'
+
+tabs:
+    fields:
+        conversations@relation:
+            label: Conversations
+            type: relation
+            tab: Conversations

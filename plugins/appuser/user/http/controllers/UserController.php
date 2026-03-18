@@ -10,6 +10,10 @@ use Str;
 
 class UserController
 {
+    public function index(): JsonResponse
+    {
+        return response()->json(User::all());
+    }
 
     public function register(): JsonResponse
     {
