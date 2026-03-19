@@ -3,6 +3,7 @@
 namespace AppChat\Chat\Http\Controllers;
 
 use App;
+use AppChat\Chat\Http\resources\ConversationResource;
 use AppChat\Chat\Models\Conversation;
 use DB;
 use Illuminate\Http\JsonResponse;
@@ -11,15 +12,15 @@ class ConversationController
 {
     public function index(): JsonResponse
     {
-        return response()->json(
-            App::make('authUser')
-                ->conversations()
-                ->with('users')
-                ->with(['messages' => function ($query) {
-                    $query->latest()->limit(1);
-                }])
-                ->get()
-        );
+        $conversations = App::make('authUser')
+            ->conversations()
+            ->with('users')
+            ->with(['messages' => function ($query) {
+                $query->latest()->limit(1);
+            }])
+            ->get();
+
+        return response()->json(ConversationResource::collection($conversations));
     }
 
     public function show($id): JsonResponse
@@ -36,7 +37,7 @@ class ConversationController
             $query->latest()->limit(100)->with(['reactions', 'files']);
         }]);
 
-        return response()->json($conversation);
+        return response()->json(new ConversationResource($conversation));
     }
 
     public function store(): JsonResponse
@@ -48,7 +49,7 @@ class ConversationController
             $conversation->name = post('name') ?? 'Conversation';
             $conversation->save();
             $conversation->users()->attach($user->id);
-            return response()->json($conversation);
+            return response()->json(new ConversationResource($conversation));
         });
     }
 
@@ -65,7 +66,7 @@ class ConversationController
         $conversation->name = post('name');
         $conversation->save();
 
-        return response()->json($conversation);
+        return response()->json(new ConversationResource($conversation));
     }
 
     public function destroy($id): JsonResponse

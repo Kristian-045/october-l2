@@ -3,6 +3,7 @@
 namespace AppChat\Chat\Http\Controllers;
 
 use App;
+use AppChat\Chat\Http\resources\MessageResource;
 use AppChat\Chat\Models\Conversation;
 use AppChat\Chat\Models\Message;
 use Db;
@@ -20,10 +21,12 @@ class MessageController
         }
 
         return response()->json(
-            $conversation->messages()
-                ->with(['reactions', 'files', 'replyTo', 'user'])
-                ->latest()
-                ->paginate(100)
+            MessageResource::collection(
+                $conversation->messages()
+                    ->with(['reactions', 'files', 'replyTo', 'user'])
+                    ->latest()
+                    ->paginate(100)
+            )
         );
     }
 
@@ -48,7 +51,7 @@ class MessageController
             $message->save();
 
             return response()->json(
-                $message->load(['reactions', 'files', 'replyTo', 'user'])
+                new MessageResource($message->load(['reactions', 'files', 'replyTo', 'user']))
             );
         });
     }
