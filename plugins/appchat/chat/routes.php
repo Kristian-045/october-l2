@@ -3,6 +3,7 @@
 use AppChat\Chat\Http\Controllers\ConversationController;
 use AppChat\Chat\Http\Controllers\ConversationUserController;
 use AppChat\Chat\Http\Controllers\MessageController;
+use AppChat\Chat\Http\Controllers\ReactionController;
 use AppUser\User\Http\middleware\AuthMiddleware;
 
 Route::prefix('api')->middleware(AuthMiddleware::class)->group(function () {
@@ -21,4 +22,14 @@ Route::prefix('api')->middleware(AuthMiddleware::class)->group(function () {
         Route::post('/store', [MessageController::class, 'store']);
         Route::delete('{id}/destroy', [MessageController::class, 'destroy']);
     });
+
+    Route::prefix('conversations/{conversation}/messages/{message}/reactions')->group(function () {
+        Route::get('/', [ReactionController::class, 'index']);
+        Route::post('/store', [ReactionController::class, 'store']);
+        Route::delete('/{reaction}/destroy', [ReactionController::class, 'destroy']);
+    });
+
+    // endpoint for emoji
+    Route::get('/emojis', [ReactionController::class, 'emojis']);
+
 });
