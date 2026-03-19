@@ -78,6 +78,14 @@ class ConversationController
         if (!$conversation->users()->where('user_id', $user->id)->exists()) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
+
+        foreach ($conversation->messages as $message) {
+            foreach ($message->files as $file) {
+                $file->delete();
+            }
+            $message->delete();
+        }
+        
         $conversation->delete();
         return response()->json(['message' => 'Conversation deleted']);
     }
