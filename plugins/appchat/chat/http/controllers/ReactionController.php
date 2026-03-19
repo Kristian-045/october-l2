@@ -42,8 +42,6 @@ class ReactionController
         $emoji = post('emoji');
         $emojis = array_column(ReactionSetting::get('available_emojis', []), 'emoji');
 
-//        var_dump($emojis);
-
         if (!in_array($emoji, $emojis)) {
             return response()->json(['message' => 'Invalid emoji'], 422);
         }
