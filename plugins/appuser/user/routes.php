@@ -10,7 +10,7 @@ Route::prefix('api/auth')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
 });
 
-Route::prefix('api/user')
+Route::prefix('api/users')
     ->middleware(AuthMiddleware::class)
     ->group(function () {
         Route::get('/', [UserController::class, 'index']);

@@ -2,6 +2,7 @@
 
 namespace AppUser\User\Http\Controllers;
 
+use AppUser\User\Http\resources\UserResource;
 use AppUser\User\Models\User;
 use Hash;
 use Illuminate\Http\JsonResponse;
@@ -12,7 +13,7 @@ class UserController
 {
     public function index(): JsonResponse
     {
-        return response()->json(User::all());
+        return response()->json(UserResource::collection(User::all()));
     }
 
     public function register(): JsonResponse
