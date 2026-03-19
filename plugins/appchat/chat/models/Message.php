@@ -45,4 +45,21 @@ class Message extends Model
     public $attachMany = [
         'files' => File::class,
     ];
+
+    public function scopeInConversation($query, $model)
+    {
+        //model Message
+        $conversationId = $model->conversation_id;
+        //model Reaction
+        if (!$conversationId) {
+            $messageId = $model->message_id;
+            if ($messageId) {
+                $conversationId = self::find($messageId)->conversation_id;
+            }
+        }
+
+        if ($conversationId) {
+            $query->where('appchat_chat_messages.conversation_id', $conversationId);
+        }
+    }
 }

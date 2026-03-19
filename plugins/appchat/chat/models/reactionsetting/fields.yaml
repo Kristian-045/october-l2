@@ -1,0 +1,12 @@
+fields:
+    available_emojis:
+        label: Available Emojis
+        type: repeater
+        comment: 'Add emojis that users can use as reactions'
+        form:
+            fields:
+                emoji:
+                    label: Emoji
+                    type: text
+                    required: true
+                    placeholder: '😀'

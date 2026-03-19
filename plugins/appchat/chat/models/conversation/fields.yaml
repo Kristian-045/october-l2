@@ -8,11 +8,10 @@ fields:
         type: text
         required: true
 
-
     users:
         label: Users
         type: relation
-        nameFrom: name
+        nameFrom: email
         tab: Users
     messages:
         label: Messages

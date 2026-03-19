@@ -31,4 +31,16 @@ class Reaction extends Model
         'user' => User::class,
         'message' => Message::class,
     ];
+
+    public function getEmojiOptions()
+    {
+        $emojis = ReactionSetting::get('available_emojis', []);
+
+        $options = [];
+        foreach ($emojis as $item) {
+            $options[$item['emoji']] = $item['emoji'];
+        }
+
+        return $options;
+    }
 }

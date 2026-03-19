@@ -1,5 +1,6 @@
 <?php namespace AppChat\Chat;
 
+use AppChat\Chat\Models\ReactionSetting;
 use Backend;
 use System\Classes\PluginBase;
 
@@ -79,6 +80,21 @@ class Plugin extends PluginBase
                 'icon' => 'icon-comments',
                 'permissions' => ['appchat.chat.*'],
                 'order' => 500,
+            ],
+        ];
+    }
+
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'category' => 'Chat',
+                'label' => 'Reaction settings',
+                'description' => 'Manage available emoji reactions',
+                'icon' => 'icon-smile-o',
+                'class' => ReactionSetting::class,
+                'order' => 500,
+                'permissions' => ['appchat.chat.*'],
             ],
         ];
     }

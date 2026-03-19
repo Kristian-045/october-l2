@@ -20,3 +20,7 @@ columns:
         label: Created
         type: datetime
         sortable: true
+    reactions_list:
+        label: Reactions
+        relation: reactions
+        select: emoji

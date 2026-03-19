@@ -48,4 +48,36 @@ class User extends Model
         'messages' => [Message::class],
         'reactions' => [Reaction::class]
     ];
+
+    public function scopeInConversation($query, $model)
+    {
+        //model is Message
+        $conversationId = $model->conversation_id;
+
+        //model is Reaction
+        if (!$conversationId) {
+            $messageId = $model->message_id;
+            if ($messageId) {
+                $message = Message::find($messageId);
+                $conversationId = $message->conversation_id;
+                // exclude users that already reacted to this message
+                $query->where(function ($q) use ($model, $messageId) {
+                    $q->whereDoesntHave('reactions', function ($q) use ($messageId) {
+                        $q->where('message_id', $messageId);
+                    });
+
+                    // include user if updating
+                    if ($model->user_id) {
+                        $q->orWhere('id', $model->user_id);
+                    }
+                });
+            }
+        }
+
+        if ($conversationId) {
+            $query->whereHas('conversations', function ($q) use ($conversationId) {
+                $q->where('appchat_chat_conversations.id', $conversationId);
+            });
+        }
+    }
 }

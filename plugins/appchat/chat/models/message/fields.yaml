@@ -19,6 +19,8 @@ fields:
         type: relation
         nameFrom: name
         required: true
+        dependsOn: conversation
+        modelScope: inConversation
 
     replyTo:
         label: Reply To
@@ -26,6 +28,8 @@ fields:
         nameFrom: message
         comment: 'Optional'
         emptyOption: '-- No reply --'
+        dependsOn: conversation
+        modelScope: inConversation
 
     files:
         label: Attachments
@@ -40,3 +44,4 @@ fields:
         nameFrom: emoji
         tab: Reactions
         useController: true
+        context: update

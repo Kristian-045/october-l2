@@ -5,7 +5,8 @@
 fields:
     emoji:
         label: Emoji
-        type: text
+        type: dropdown
+        options: getEmojiOptions
         required: true
 
     message:
@@ -13,9 +14,13 @@ fields:
         type: relation
         nameFrom: message
         required: true
+        dependsOn: message
+        modelScope: inConversation
 
     user:
         label: User
         type: relation
         nameFrom: name
         required: true
+        dependsOn: message
+        modelScope: inConversation

@@ -68,6 +68,7 @@ class MessageController
             return response()->json(['message' => 'Message not found'], 404);
         }
 
+        //todo check if file is also deleted
         $message->delete();
 
         return response()->json(['message' => 'Message deleted']);
